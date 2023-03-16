@@ -3,8 +3,9 @@
 
 {% block app_content %} 
     <h1>My To-Do List</h1>
-
+    <div class="container">
     <form action="" method="POST">
+        {{form.hidden_tag()}}
         <div class="row">
             <div class="col-md-7">
                 {{form.task.label}} <br>
@@ -16,21 +17,36 @@
            </div>
            <div class="col-md-2">
             <br>{{form.submit}}
-       </div>
-       
-
+            </div>
+    
         </div>
+    </div>
         
 
-    </form>
 
-    <div class="row">
-        <div class="col-md-8">
-            {{wtf.quick_form(form)}}
-        </div>
-
-    </div>
-
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Task</th>
+                <th scope="col">Assigned To</th>
+                <th scope="col">Due Date</th>
+                <th scope="col">Overdue</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in task%}
+            <tr>
+                <th scope="row">1</th>
+                <td> {{task}} </td>
+                <td> default</td>
+                <td> {{ moment(task.due_date).fromNow() }} </td>
+            </tr>
+            {% endfor%}
+        </tbody>
+    </table>
+</div>
 
 
 
